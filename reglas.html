@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reglas de Negocio - Sistema Clínico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        h1 { color: #34d399; font-size: 2rem; margin-bottom: 20px; text-align: center; }
+        h2 { color: #6ee7b7; font-size: 1.2rem; margin-top: 25px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+        p, li { color: #cbd5e1; line-height: 1.6; margin-bottom: 6px; }
+        ul { padding-left: 20px; margin-bottom: 15px; }
+        .btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #334155;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .btn-back:hover { background-color: #475569; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Reglas de Negocio</h1>
+        
+        <h2>Pacientes</h2>
+        <ul>
+            <li><strong>RN-01:</strong> Todo paciente se identifica de forma única mediante su documento de identidad (DNI, Pasaporte o Carné de Extranjería).</li>
+            <li><strong>RN-02:</strong> Solo los pacientes registrados en el sistema pueden agendar citas o ingresar a la cola de atención.</li>
+        </ul>
+
+        <h2>Médicos</h2>
+        <ul>
+            <li><strong>RN-03:</strong> Todo médico debe tener al menos una especialidad asignada en su registro activo.</li>
+            <li><strong>RN-04:</strong> Únicamente los médicos registrados y habilitados pueden recibir asignación de horarios y citas.</li>
+        </ul>
+
+        <h2>Horarios</h2>
+        <ul>
+            <li><strong>RN-05:</strong> Cada turno se define indicando médico, día, hora de inicio, hora de fin y consultorio asignado.</li>
+            <li><strong>RN-06:</strong> No se puede registrar un turno cuya franja horaria se solape con otro turno previamente asignado al mismo médico.</li>
+        </ul>
+
+        <h2>Citas</h2>
+        <ul>
+            <li><strong>RN-07:</strong> Una cita agendada se registra inicialmente en estado Confirmada.</li>
+            <li><strong>RN-08:</strong> Un paciente no puede agendar una cita si ya cuenta con otra cita vigente en la misma fecha y hora.</li>
+            <li><strong>RN-09:</strong> Un médico no puede recibir una cita si ya tiene otra cita activa programada en esa misma franja horaria.</li>
+            <li><strong>RN-10:</strong> Una cita puede reprogramarse, cancelarse o marcarse como Completada según su ciclo de vida.</li>
+        </ul>
+
+        <h2>Pagos</h2>
+        <ul>
+            <li><strong>RN-11:</strong> Todo pago debe estar vinculado obligatoriamente a una cita registrada o atención realizada.</li>
+            <li><strong>RN-12:</strong> El sistema admite pagos en efectivo, tarjeta de débito/crédito, transferencia bancaria y cobertura por seguro.</li>
+            <li><strong>RN-13:</strong> Los pagos registrados pueden tener estado Pagado, Parcial o Pendiente, rastreando montos abonados y saldos.</li>
+        </ul>
+
+        <h2>Triaje</h2>
+        <ul>
+            <li><strong>RN-14:</strong> El triaje clasifica el nivel de prioridad en tres niveles: Emergencia, Urgencia o Normal.</li>
+            <li><strong>RN-15:</strong> El paciente derivado de triaje ingresa a la cola de atención directa sin requerir cita previa.</li>
+        </ul>
+
+        <h2>Cola de Atención</h2>
+        <ul>
+            <li><strong>RN-16:</strong> La cola de espera integra tanto a pacientes provenientes de citas programadas como de triaje.</li>
+            <li><strong>RN-17:</strong> El orden de llamada lo determina la prioridad (Emergencia > Urgencia > Normal) y el orden de llegada.</li>
+            <li><strong>RN-18:</strong> El sistema debe registrar la hora exacta de inicio y fin de la atención médica.</li>
+            <li><strong>RN-19:</strong> Un paciente en cola puede ser revaluado y escalado a estado Emergencia si su condición empeora.</li>
+        </ul>
+
+        <h2>Consulta Médica</h2>
+        <ul>
+            <li><strong>RN-20:</strong> Toda consulta debe registrar obligatoriamente signos vitales, motivo de consulta, diagnóstico y tratamiento.</li>
+            <li><strong>RN-21:</strong> Los datos ingresados en la consulta se consolidan automáticamente en la historia clínica del paciente.</li>
+        </ul>
+
+        <h2>Historia Clínica</h2>
+        <ul>
+            <li><strong>RN-22:</strong> La historia clínica se organiza por paciente y se vincula mediante su número de documento de identidad.</li>
+            <li><strong>RN-23:</strong> Cada atención finalizada genera automáticamente una entrada cronológica en la historia clínica.</li>
+        </ul>
+
+        <h2>Recetas</h2>
+        <ul>
+            <li><strong>RN-24:</strong> La receta médica debe incluir el detalle de los medicamentos, cantidades, dosis y tiempo de tratamiento.</li>
+            <li><strong>RN-25:</strong> La receta se genera en estado Pendiente hasta ser despachada por el área de Farmacia.</li>
+        </ul>
+
+        <h2>Farmacia</h2>
+        <ul>
+            <li><strong>RN-26:</strong> El sistema debe validar la existencia de stock suficiente antes de autorizar la entrega de la receta.</li>
+            <li><strong>RN-27:</strong> Al entregar una receta, el sistema descuenta las unidades del inventario y actualiza su estado a Entregada.</li>
+            <li><strong>RN-28:</strong> Si no hay stock suficiente, la receta pasa a estado Falta de Stock sin modificar el inventario.</li>
+            <li><strong>RN-29:</strong> Una receta marcada como Entregada no puede volver a despacharse.</li>
+        </ul>
+
+        <h2>Reportes</h2>
+        <ul>
+            <li><strong>RN-30:</strong> La generación y visualización de reportes ejecutivos está restringida al rol Administrador.</li>
+            <li><strong>RN-31:</strong> Los reportes operacionales y financieros se generan utilizando únicamente datos consolidados de citas, pagos y farmacia.</li>
+        </ul>
+
+        <!-- Enlace para volver a la página principal -->
+        <a href="index.html" class="btn-back">&larr; Volver al inicio</a>
+    </div>
+
+</body>
+</html>

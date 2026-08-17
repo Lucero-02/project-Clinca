@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesos de Negocio - Sistema Clínico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        h1 { color: #34d399; font-size: 2rem; margin-bottom: 20px; text-align: center; }
+        h2 { color: #6ee7b7; font-size: 1.3rem; margin-top: 30px; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+        h3 { color: #a7f3d0; font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+        p, li { color: #cbd5e1; line-height: 1.6; margin-bottom: 8px; }
+        ul { padding-left: 20px; margin-bottom: 15px; }
+        .btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #334155;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .btn-back:hover { background-color: #475569; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Procesos y Actores de Negocio</h1>
+        
+        <h2>Actores de Negocio</h2>
+        <ul>
+            <li><strong>Paciente:</strong> Persona que solicita atención médica, agenda citas o retira medicamentos.</li>
+            <li><strong>Recepcionista / Cajero:</strong> Encargado del registro de pacientes, programación de citas y cobros.</li>
+            <li><strong>Administrador / Gestor:</strong> Encargado de la gestión de médicos, horarios y reportes de gestión.</li>
+            <li><strong>Médico:</strong> Profesional de la salud que atiende al paciente, registra diagnósticos y emite recetas.</li>
+            <li><strong>Farmacéutico:</strong> Responsable del control de inventario y la entrega de medicamentos.</li>
+        </ul>
+
+        <h2>Procesos Institucionales de Alto Nivel</h2>
+        <p>A continuación se describen los procesos soportados por el sistema:</p>
+
+        <h3>1. Registro de Pacientes</h3>
+        <p>La Recepción registra al paciente a partir de sus datos personales, asignándole un número de documento o ID único. Este registro habilita la programación de citas y la atención por triaje.</p>
+
+        <h3>2. Gestión de Médicos</h3>
+        <p>La Administración registra a los profesionales de la salud y les asigna su respectiva especialidad. El médico queda habilitado para la asignación de horarios y citas.</p>
+
+        <h3>3. Gestión de Horarios</h3>
+        <p>La Administración define los turnos de atención indicando día, hora de inicio, hora de fin y consultorio. El sistema evita la superposición de horarios para un mismo médico.</p>
+
+        <h3>4. Programación de Citas</h3>
+        <p>La Recepción agenda la cita seleccionando paciente, médico, especialidad y fecha-hora. El sistema valida la disponibilidad antes de confirmarla. La cita queda en estado Confirmada y puede reprogramarse, cancelarse o marcase como Atendida.</p>
+
+        <h3>5. Gestión de Pagos</h3>
+        <p>La Recepción registra el cobro de la consulta o procedimiento mediante efectivo, tarjeta, transferencia o seguro médico. El estado se clasifica en Pagado, Parcial o Pendiente.</p>
+
+        <h3>6. Triaje y Atención por Emergencia</h3>
+        <p>Para ingresos por urgencia, el personal evalúa la gravedad y clasifica al paciente en una prioridad: Emergencia, Urgencia o Normal, incorporándolo directamente a la cola de atención sin cita previa.</p>
+
+        <h3>7. Cola de Atención</h3>
+        <p>La cola prioriza a los pacientes según su estado (Emergencia, Urgencia, Normal) y por orden de llegada dentro de cada nivel. El médico llama al siguiente paciente registrando el inicio y fin del turno.</p>
+
+        <h3>8. Atención Médica</h3>
+        <p>El médico realiza la consulta, registra signos vitales (peso, talla, presión, temperatura), motivo, diagnóstico y tratamiento. Los datos se actualizan en la historia clínica del paciente.</p>
+
+        <h3>9. Gestión de Recetas</h3>
+        <p>Durante la consulta, el médico emite una receta detallando medicamentos, dosis e indicaciones. La receta se genera en estado Pendiente para su posterior atención.</p>
+
+        <h3>10. Gestión Farmacéutica</h3>
+        <p>El farmacéutico recibe la receta, verifica la disponibilidad de stock en el inventario y realiza la entrega descontando los medicamentos, marcándola como Entregada.</p>
+
+        <h3>11. Generación de Reportes</h3>
+        <p>La Administración genera reportes consolidados agrupados en tres perspectivas: financiera (ingresos y facturación), operativa (citas y tiempo de atención) y farmacéutica (rotación de stock).</p>
+
+        <!-- Enlace para volver a la página principal -->
+        <a href="index.html" class="btn-back">&larr; Volver al inicio</a>
+    </div>
+
+</body>
+</html>
